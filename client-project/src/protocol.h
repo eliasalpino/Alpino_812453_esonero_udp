@@ -56,4 +56,4 @@ int send_request_and_receive_response(int sockfd,
     #define STRCASECMP strcasecmp
 #endif
 
-#endif // PROTOCOL_H
+#endif

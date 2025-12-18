@@ -68,7 +68,6 @@ int main(int argc, char* argv[]) {
     struct sockaddr_in srv = *(struct sockaddr_in*)res->ai_addr;
     srv.sin_port = htons(port);
 
-    /* Serializza request */
     char buffer[sizeof(char)+64];
     int offset=0;
     memcpy(buffer+offset,&type,1);
@@ -78,13 +77,11 @@ int main(int argc, char* argv[]) {
     sendto(sock,buffer,sizeof(buffer),0,
            (struct sockaddr*)&srv,sizeof(srv));
 
-    /* Ricezione response */
     char respbuf[512];
     socklen_t len = sizeof(srv);
     recvfrom(sock,respbuf,sizeof(respbuf),0,
              (struct sockaddr*)&srv,&len);
 
-    /* Deserializzazione */
     weather_response_t resp;
     offset=0;
     uint32_t net_status;

@@ -18,7 +18,6 @@
 
 #include "protocol.h"
 
-/* ================== Platform ================== */
 
 int platform_init(void) {
 #ifdef _WIN32
@@ -35,7 +34,6 @@ void platform_cleanup(void) {
 #endif
 }
 
-/* ================== Float conversion ================== */
 
 uint32_t float_to_net(float f) {
     uint32_t u;
@@ -43,7 +41,6 @@ uint32_t float_to_net(float f) {
     return htonl(u);
 }
 
-/* ================== Meteo ================== */
 
 static float rand_range(float a, float b) {
     return a + (float)rand() / RAND_MAX * (b - a);
@@ -54,7 +51,6 @@ float get_humidity(void)    { return rand_range(20.0f, 100.0f); }
 float get_wind(void)        { return rand_range(0.0f, 100.0f); }
 float get_pressure(void)    { return rand_range(950.0f, 1050.0f); }
 
-/* ================== Cities ================== */
 
 static const char* cities[] = {
     "Bari","Roma","Milano","Napoli","Torino",
@@ -68,7 +64,6 @@ int city_supported(const char* city) {
     return 0;
 }
 
-/* ================== MAIN ================== */
 
 int main(int argc, char** argv) {
 
@@ -127,7 +122,6 @@ int main(int argc, char** argv) {
         if (n <= 0)
             continue;
 
-        /* DNS lookup */
         char host[NI_MAXHOST];
         char ip[NI_MAXHOST];
 
@@ -175,7 +169,6 @@ int main(int argc, char** argv) {
             }
         }
 
-        /* Serialize response */
         char out[sizeof(uint32_t)+sizeof(char)+sizeof(float)];
         offset = 0;
 
