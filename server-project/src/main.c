@@ -84,11 +84,13 @@ int city_is_valid(const char* city) {
 
         if (!((c >= 'A' && c <= 'Z') ||
               (c >= 'a' && c <= 'z') ||
+              (c >= '0' && c <= '9') ||
               (c == ' ')))
             return 0;
     }
     return 1;
 }
+
 
 
 int main(int argc, char** argv) {
